@@ -48,7 +48,7 @@ to your favorite IDE (mine is Eclipse) and start to make changes.
 
 ### Create Entity Classes
 After you imported the project, we need to create our Entities, so I've created
-a package `com.ferdisonmezay.tutorials.genericrestapi.model` and added three classes
+a package `com.ghanmi.genericrestapi.model` and added three classes
 in this package.
  - `BaseModel.java` will be super class for all entity classes
  - `Grant.java` is an entity class
@@ -59,7 +59,7 @@ BaseModel.java is as follows
 
 ```java
 
- package com.ferdisonmezay.tutorials.genericrestapi.model;
+ package com.ghanmi.genericrestapi.model;
 
  import java.io.Serializable;
  import javax.persistence.Basic;
@@ -89,7 +89,7 @@ BaseModel.java is as follows
 
 ```java
 
-package com.ferdisonmezay.tutorials.genericrestapi.model;
+package com.ghanmi.genericrestapi.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -116,7 +116,7 @@ public class Grant extends BaseModel {
 
 ```java
 
-package com.ferdisonmezay.tutorials.genericrestapi.model;
+package com.ghanmi.genericrestapi.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -144,7 +144,7 @@ public class Role extends BaseModel{
 
 ### Create Dao Classes
 For database operations we need to create dao classes, for each entity. first
-I'll create `com.ferdisonmezay.tutorials.genericrestapi.dao` package and then,
+I'll create `com.ghanmi.genericrestapi.dao` package and then,
 I'm going to create a `BaseDao.java` superclass which is extended from
 `JpaRepository`.
  - BaseDao.java
@@ -154,10 +154,10 @@ I'm going to create a `BaseDao.java` superclass which is extended from
  First we need to create `BaseDao.java` as follows:
 
 ```java
-package com.ferdisonmezay.tutorials.genericrestapi.dao;
+package com.ghanmi.genericrestapi.dao;
 import java.io.Serializable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.ferdisonmezay.tutorials.genericrestapi.model.BaseModel;
+import com.ghanmi.genericrestapi.model.BaseModel;
 
 public interface BaseDao<T extends BaseModel> extends JpaRepository<T, Serializable> {
 
@@ -168,8 +168,8 @@ public interface BaseDao<T extends BaseModel> extends JpaRepository<T, Serializa
 `GrantDao.java` is as follows:
 
 ```java
-package com.ferdisonmezay.tutorials.genericrestapi.dao;
-import com.ferdisonmezay.tutorials.genericrestapi.model.Grant;
+package com.ghanmi.genericrestapi.dao;
+import com.ghanmi.genericrestapi.model.Grant;
 
 public interface GrantDao extends BaseDao<Grant> {
 
@@ -179,8 +179,8 @@ public interface GrantDao extends BaseDao<Grant> {
 `RoleDao.java` is as follows:
 
 ```java
-package com.ferdisonmezay.tutorials.genericrestapi.dao;
-import com.ferdisonmezay.tutorials.genericrestapi.model.Role;
+package com.ghanmi.genericrestapi.dao;
+import com.ghanmi.genericrestapi.model.Role;
 
 public interface RoleDao extends BaseDao<Role> {
 
@@ -199,7 +199,7 @@ When creating controllers, we will use the same method that we've used in creati
 `GenericRestController.java` is as follows:
 
 ```java
-package com.ferdisonmezay.tutorials.genericrestapi.controller;
+package com.ghanmi.genericrestapi.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -207,8 +207,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.ferdisonmezay.tutorials.genericrestapi.dao.BaseDao;
-import com.ferdisonmezay.tutorials.genericrestapi.model.BaseModel;
+import com.ghanmi.genericrestapi.dao.BaseDao;
+import com.ghanmi.genericrestapi.model.BaseModel;
 
 public class GenericRestController<T extends BaseModel> {
 
@@ -236,11 +236,11 @@ public class GenericRestController<T extends BaseModel> {
 `GrantController.java` is as follows:
 
 ```java
-package com.ferdisonmezay.tutorials.genericrestapi.controller;
+package com.ghanmi.genericrestapi.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.ferdisonmezay.tutorials.genericrestapi.model.Grant;
+import com.ghanmi.genericrestapi.model.Grant;
 
 @RestController
 @RequestMapping("/grants")
@@ -254,11 +254,11 @@ public class GrantController extends GenericRestController<Grant> {
 `RoleController.java` is as follows:
 
 ```java
-package com.ferdisonmezay.tutorials.genericrestapi.controller;
+package com.ghanmi.genericrestapi.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.ferdisonmezay.tutorials.genericrestapi.model.Role;
+import com.ghanmi.genericrestapi.model.Role;
 
 @RestController
 @RequestMapping("/roles")
@@ -312,12 +312,12 @@ We need to add swagger dependencies to our `pom.xml` file.
 
 
 then I'm going to create a `SwaggerConfig.java` configuration file, in
-`com.ferdisonmezay.tutorials.genericrestapi.configuration` package.
+`com.ghanmi.genericrestapi.configuration` package.
 
 `SwaggerConfig.java` file will be as follows:
 
 ```java
-package com.ferdisonmezay.tutorials.genericrestapi.configuration;
+package com.ghanmi.genericrestapi.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

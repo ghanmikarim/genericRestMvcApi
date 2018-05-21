@@ -1,4 +1,4 @@
-package com.ferdisonmezay.tutorials.genericrestapi;
+package com.ghanmi.genericrestapi;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
